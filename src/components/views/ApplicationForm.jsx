@@ -9,7 +9,7 @@ const ApplicationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!name || !civilId || !email || !phone) {
       setError('Todos los campos son obligatorios');
       return;
@@ -23,7 +23,7 @@ const ApplicationForm = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md shadow-md">
+    <div className="bg-white p-4 rounded-md shadow-md max-w-xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Solicitud de Tarjeta de Crédito</h2>
       <form onSubmit={handleSubmit}>
         <label className="block mb-2">

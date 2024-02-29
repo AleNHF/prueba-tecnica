@@ -16,7 +16,7 @@ const ApprovedCards = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md shadow-md">
+    <div className="bg-white p-4 rounded-md shadow-md max-w-xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Tarjetas Aprobadas</h2>
       <table className="w-full border">
         <thead>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 
 function AppHolder() {
   
@@ -9,6 +10,7 @@ function AppHolder() {
       <div className="modal-container rounded-md bg-white w-full h-full">
         <div className="modal-header h-[65px]">
           <Navbar />
+          <Sidebar />
         </div>
         <div className="modal-body min-h-[600px]">
           <Outlet />
