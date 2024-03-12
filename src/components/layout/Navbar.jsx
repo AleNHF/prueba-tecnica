@@ -33,8 +33,8 @@ const Navbar = () => {
             <div
                 className={
                     nav
-                        ? "fixed top-0 left-0 w-[300px] h-screen bg-white z-10 duration-300 bg-gray-800 text-white"
-                        : "fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10 duration-300 bg-gray-800 text-white"
+                        ? "fixed top-0 left-0 w-[300px] h-screen z-10 duration-300 bg-gray-800 text-white"
+                        : "fixed top-0 left-[-100%] w-[300px] h-screen z-10 duration-300 bg-gray-800 text-white"
                 }
             >
                 <AiOutlineClose
