@@ -16,7 +16,7 @@ COPY . .
 # Construye la aplicación
 RUN npm run build
 
-# Expone el puerto 3000
+# Exponer el puerto 3000
 EXPOSE 3000
 
 # Define el comando para ejecutar la aplicación
