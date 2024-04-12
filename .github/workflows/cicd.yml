@@ -1,26 +1,66 @@
-name: cicd-workflow with slack integration
+name: project-configuration-management
+
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - 'main'
+  pull_request:
+    types: [opened, reopened, closed]
+  create:
+    branches:
+      - '*' # Notifica cuando se crea cualquier nueva rama
+
 jobs:
-  job1:
+  build:
     runs-on: ubuntu-latest
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
     steps:
-    - uses: act10ns/slack@v2
-      with:
-        status: starting
-        channel: '#mar-2024-weekend-batch'
-        message: Starting Docker Build image...
-      if: always()
-    - uses: actions/checkout@v3
-    - name: Build Docker image
-      run: |
-        docker build -t my-docker-repo .
-    - uses: act10ns/slack@v2
-      with:
-        channel: '#mar-2024-weekday-batch'
-        status: ${{ job.status }}
-        steps: ${{ toJson(steps) }}
-      if: always()
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Notify Slack on Workflow Start
+        if: github.event_name == 'push'
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#project-config'
+          message: 'Push event detected. Starting build...'
+
+      - name: Notify Slack on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          channel: '#project-config'
+          message: |
+            Pull Request ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }} ${GITHUB_EVENT_NAME}
+            Title: ${{ github.event.pull_request.title }}
+            Author: ${{ github.event.pull_request.user.login }}
+            Action: ${{ github.event_name }}
+            State: ${{ github.event.pull_request.state }}
+
+      - name: Notify Slack on Workflow Completion
+        if: github.event_name == 'push'
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          channel: '#project-config'
+          message: 'Build completed successfully.'
+
+      - name: Notify Slack on New Branch
+        if: github.event_name == 'create'
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#project-config'
+          message: 'New branch created: ${{ github.event.ref }}.'
