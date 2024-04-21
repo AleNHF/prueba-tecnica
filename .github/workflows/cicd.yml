@@ -36,7 +36,7 @@ jobs:
         with:
           status: starting
           channel: '#project-config'
-          message: 'Push event detected. Starting build...'
+          message: 'Push event detected ${{ github.ref }}. Starting build...'
 
       - name: Notify Slack on Pull Request
         if: github.event_name == 'pull_request'
