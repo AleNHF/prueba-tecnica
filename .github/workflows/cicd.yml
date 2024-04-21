@@ -36,7 +36,7 @@ jobs:
         with:
           status: starting
           channel: '#project-config'
-          message: 'Push event detected ${{ github.ref }}. Starting build...'
+          message: 'Se detectó un evento de push en la rama << ${{ github.ref }} >>. Iniciando la construcción...'
 
       - name: Notify Slack on Pull Request
         if: github.event_name == 'pull_request'
@@ -46,10 +46,10 @@ jobs:
           channel: '#project-config'
           message: |
             Pull Request ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.pull_request.number }} ${{ github.event_name }}
-            Title: ${{ github.event.pull_request.title }}
-            Author: ${{ github.event.pull_request.user.login }}
-            Action: ${{ github.event_name }}
-            State: ${{ github.event.pull_request.state }}
+            Título: ${{ github.event.pull_request.title }}
+            Autor: ${{ github.event.pull_request.user.login }}
+            Acción: ${{ github.event_name }}
+            Estado: ${{ github.event.pull_request.state }}
 
       - name: Notify Slack on Workflow Completion
         if: github.event_name == 'push'
@@ -57,7 +57,7 @@ jobs:
         with:
           status: ${{ job.status }}
           channel: '#project-config'
-          message: 'Build completed successfully.'
+          message: 'Construcción completada satisfactoriamente.'
 
       - name: Notify Slack on New Branch
         if: github.event_name == 'create'
@@ -65,4 +65,4 @@ jobs:
         with:
           status: starting
           channel: '#project-config'
-          message: 'New branch created: ${{ github.event.ref }}.'
+          message: 'Nueva rama creada: ${{ github.event.ref }}.'
