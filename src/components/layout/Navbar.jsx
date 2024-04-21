@@ -20,7 +20,7 @@ const Navbar = () => {
                 {/* <img src="https://logodix.com/logo/831785.png" className='img-fluid'
                     style={{ width: '100px', height: 'auto' }} /> */}
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2">
-                    Banco <span className="font-bold">Credit Suisse Prueba</span>
+                    Banco <span className="font-bold">Credit Suisse</span>
                 </h1>
             </div>
 
