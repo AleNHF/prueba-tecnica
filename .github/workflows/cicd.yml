@@ -45,7 +45,7 @@ jobs:
           status: ${{ job.status }}
           channel: '#project-config'
           message: |
-            Pull Request ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }} ${GITHUB_EVENT_NAME}
+            Pull Request ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.pull_request.number }} ${{ github.event_name }}
             Title: ${{ github.event.pull_request.title }}
             Author: ${{ github.event.pull_request.user.login }}
             Action: ${{ github.event_name }}
